@@ -1,0 +1,80 @@
+body {
+    background-color: aqua;
+    margin: 0;
+    padding: 0  ;
+}
+.main-menu {
+    background-color: aliceblue;
+    padding: 5px;
+}
+.main-menu ul,
+.main-menu li {
+    list-style: none;
+    text-decoration: none;
+}
+.main-menu li {
+    display: inline;
+    margin: 0 5px 0 5px;
+}
+
+.container {
+    width: 70%;
+    float: left;
+}
+.fullwidth {
+    width: 100%;
+}
+
+sidebar {
+    width: 30%;
+    float: left;
+}
+
+.widget_title {
+    color: yellow;
+}
+
+article {
+    border-bottom: 1px solid #000;
+    background-color: #fff;
+    padding: 10px;
+    margin: 10px;
+}
+
+article .post_thumbnail {
+    float: left;
+    margin-right: 10px;
+}
+
+.paginacao {
+    margin: 30px 0;
+}
+
+.pagina_anterior {
+    float: left;
+}
+.proxima_pagina {
+    float: right;
+}
+
+.comentario {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0px;
+}
+.comentario_foto {
+    float: left;
+    margin-right: 10px;
+}
+
+.post_related_item {
+    width: 33%;
+    float: left;
+}
+
+.custom-logo {
+    height: 70px;
+    width: auto;
+    border-radius: 50%;
+    float: left;
+    margin: 0 10px 10px 10px;
+}

@@ -3,7 +3,7 @@
 <section>
     <div class="container">
         <div class="row">
-            <div class="col-sm-8 main_content">
+            <div id="post-<?php the_ID(); ?>" <?php post_class("col-sm-8 main_content") ?>>
                 <?php if(have_posts()): ?>
                     <?php while(have_posts()): ?>
                         <?php the_post(); ?>

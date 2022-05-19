@@ -36,6 +36,9 @@ body {
     width: auto;
     margin-top: 15px;
 }
+.custom-header img {
+    width: 100%;
+}
 
 .main_nav_border {
     border-top: 2px solid #27292d;
@@ -245,6 +248,20 @@ footer {
     justify-content: space-between;
     padding: 10px;
 }
+
+article.sticky {
+    width: 100%;
+}
+article.sticky .post_item {
+    height: auto;
+}
+
+/* Caso o plugin Wordpress Popular Posts coloque uma tab UL em volta do post */
+/* .wpp-list {
+    margin: 0;
+    padding: 0;
+    display: inline;
+} */
 
 
 /* Tablet na Vertical */

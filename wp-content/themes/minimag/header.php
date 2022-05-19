@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html <?php language_attributes(); ?>>
 <head>
+    <meta charset="<?php bloginfo('charset'); ?>">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" >
     <?php wp_head(); ?>
 </head>
@@ -65,19 +66,28 @@
                             <div class="col-sm-8 random_post">
                                 <strong>Você já leu?</strong>
                                 <?php 
-                                    $gm_query = new WP_Query([
-                                        'posts_per_page' => 1,
-                                        'post_type' => 'post',
-                                        'orderby' => 'rand'
-                                    ]);
-                                    if($gm_query->have_posts()) {
-                                        while($gm_query->have_posts()) {
-                                            $gm_query->the_post();
-                                            ?>
-                                                <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-                                            <?php
+                                    if(function_exists('wpp_get_mostpopular')) {
+                                        wpp_get_mostpopular([
+                                            'Limit' => 1,
+                                            'wpp_start' => '',
+                                            'wpp_end'=> '',
+                                            'post_html' => '<a href="{url}">{text_title}</a>'
+                                        ]);
+                                    } else {
+                                        $gm_query = new WP_Query([
+                                            'posts_per_page' => 1,
+                                            'post_type' => 'post',
+                                            'orderby' => 'rand'
+                                        ]);
+                                        if($gm_query->have_posts()) {
+                                            while($gm_query->have_posts()) {
+                                                $gm_query->the_post();
+                                                ?>
+                                                    <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                                                <?php
+                                            }
+                                            wp_reset_postdata();
                                         }
-                                        wp_reset_postdata();
                                     }
                                 ?>
                             </div>
@@ -118,4 +128,9 @@
                 </div>
             </div>
         </div>
+        <?php if(get_header_image()): ?>
+            <div class="container custom-header">
+                <img src="<?php header_image(); ?>" alt="Custom Header">
+            </div>
+        <?php endif; ?>
     </header>

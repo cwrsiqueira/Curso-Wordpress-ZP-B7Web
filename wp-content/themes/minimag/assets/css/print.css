@@ -1,0 +1,12 @@
+@media print {
+    header,
+    .sidebar,
+    .paginacao, 
+    .comments_area,
+    footer {
+        display: none;
+    }
+    .post_excerpt {
+        margin-top: 30px;
+    }
+}

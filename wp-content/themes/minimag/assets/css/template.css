@@ -256,6 +256,17 @@ article.sticky .post_item {
     height: auto;
 }
 
+.loadmorebutton {
+    width: 150px;
+    height: 40px;
+    background-color: #3382b5;
+    color: #fff;
+    text-align: center;
+    line-height: 40px;
+    margin: auto;
+    cursor: pointer;
+}
+
 /* Caso o plugin Wordpress Popular Posts coloque uma tab UL em volta do post */
 /* .wpp-list {
     margin: 0;

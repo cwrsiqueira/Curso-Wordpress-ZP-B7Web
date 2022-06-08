@@ -3,7 +3,7 @@ Contributors: Deepak anand
 Donate link: 
 Tags: Dummy posts, Dummy Users, Dummy woocommerce products, dummy custom posts, WordPress dummy content, Test content for WordPress themes
 Requires at least: 5.6
-Tested up to: 5.9
+Tested up to: 6.0
 Stable tag: trunk
 Requires PHP: 5.4
 License: GPLv2 or later
@@ -57,7 +57,8 @@ Yes.
 
 == Changelog ==
 1.1.0 - Updated js to work with latest WordPress release 5.7 
-1.1.2 - Tested with WordPress realease 5.8 and woocommerce 5.5.1 
-2.0.0 - Tested with WordPress realease 5.8.1 - woocommerce 5.7.1 - PHP 8 
+1.1.2 - Tested with WordPress release 5.8 and woocommerce 5.5.1 
+2.0.0 - Tested with WordPress release 5.8.1 - woocommerce 5.7.1 - PHP 8 
 2.0.4 - Fixed the features image missing extensions.
+2.0.5 - Tested with WordPress release 6.0 and woocommerce 6.5.1
 == Upgrade Notice ==

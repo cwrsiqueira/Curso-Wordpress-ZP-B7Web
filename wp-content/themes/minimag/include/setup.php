@@ -43,6 +43,8 @@ function gm_after_setup() {
 
     register_nav_menu("primary", "Menu Primário");
     register_nav_menu("top", "Menu Superior");
+
+    load_theme_textdomain('minimag', get_template_directory() . '/languages');
 }
 
 function gm_widgets() {

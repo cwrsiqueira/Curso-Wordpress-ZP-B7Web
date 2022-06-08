@@ -64,7 +64,7 @@
                     <div class="main_info">
                         <div class="row">
                             <div class="col-sm-8 random_post">
-                                <strong>Você já leu?</strong>
+                                <strong><?php echo __('Have you seen yet?', 'minimag') ?></strong>
                                 <?php 
                                     if(function_exists('wpp_get_mostpopular')) {
                                         wpp_get_mostpopular([
@@ -93,7 +93,7 @@
                             </div>
                             <div class="col-sm-4 social_area">
                                 <div class="social_txt">
-                                    SIGA:
+                                    <?php echo __('FOLLOW', 'minimag'); ?>:
                                 </div>
                                 <div class="social_icons">
                                     <?php if(get_theme_mod("gm_facebook")): ?>

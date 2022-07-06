@@ -33,13 +33,14 @@ jQuery(function(){
 
     jQuery('.loadmorebutton').on('click', loadMorePosts)
 
+    // Aparecer mais posts com o rolar da página
+    /*
     jQuery(window).on('scroll', function(){
         var porcent = (window.scrollY / document.body.scrollHeight) * 100;
-        console.log(porcent)
+        // console.log(porcent)
         if(porcent >= 50) {
             loadMorePosts();
         }
     })
-
-
+    */
 })

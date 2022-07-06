@@ -14,27 +14,29 @@
                     <div style="clear: both;"></div>
                     <hr>
                     <div class="paginacao">
+                        
+                        <!-- <div class="pagina_anterior"><?php previous_posts_link('Anterior'); ?></div> -->
 
                         <?php 
-                            // global $wp_query;
-                            // echo paginate_links([
-                            //     'current' => max(1, get_query_var('paged')),
-                            //     'total' => $wp_query->max_num_pages,
-                            //     'show_all' => false,
-                            //     'end_size' => 1,
-                            //     'mid_size' => 1,
-                            //     'prev_next' => true,
-                            //     'prev_text' => '<',
-                            //     'next_text' => '>',
-                            //     'before_page_number' => '[ ',
-                            //     'after_page_number' => ' ]',
-                            // ]);
+                            global $wp_query;
+                            echo paginate_links([
+                                'current' => max(1, get_query_var('paged')),
+                                'total' => $wp_query->max_num_pages,
+                                'show_all' => false,
+                                'end_size' => 1,
+                                'mid_size' => 1,
+                                'prev_next' => true,
+                                // 'prev_text' => '<',
+                                // 'next_text' => '>',
+                                'before_page_number' => '[ ',
+                                'after_page_number' => ' ]',
+                            ]);
                         ?>
 
-                        <!-- <div class="pagina_anterior"><?php previous_posts_link('Anterior'); ?></div>
-                        <div class="proxima_pagina"><?php next_posts_link('Próxima'); ?></div> -->
+                        <!-- <div class="proxima_pagina"><?php next_posts_link('Próxima'); ?></div> -->
 
-                        <div class="loadmorebutton">Carregar mais...</div>
+                        <!-- Ativar o Botão Carregar mais -->
+                        <!-- <div class="loadmorebutton">Carregar mais...</div> -->
                     </div>
                 <?php endif; ?>
             </div>

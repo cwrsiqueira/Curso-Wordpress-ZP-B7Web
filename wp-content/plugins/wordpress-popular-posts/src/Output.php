@@ -91,9 +91,9 @@ class Output {
      * @param   array                           $admin_options
      * @param   WordPressPopularPosts\Image     $thumbnail
      * @param   WordPressPopularPosts\Translate $translate
-     * @param   \WordPressPopularPosts\Themer    $themer
+     * @param   WordPressPopularPosts\Themer    $themer
      */
-    public function __construct(array $public_options, array $admin_options, Image $thumbnail, Translate $translate, \WordPressPopularPosts\Themer $themer)
+    public function __construct(array $public_options, array $admin_options, Image $thumbnail, Translate $translate, Themer $themer)
     {
         $this->public_options = $public_options;
         $this->admin_options = $admin_options;
@@ -181,8 +181,8 @@ class Output {
             ) {
                 $this->output .= '<div class="popular-posts-sr">';
 
-                if ( @file_exists(get_template_directory() . '/wordpress-popular-posts/themes/' . $this->public_options['theme']['name'] . '/style.css') ) {
-                    $theme_stylesheet = get_template_directory() . '/wordpress-popular-posts/themes/' . $this->public_options['theme']['name'] . '/style.css';
+                if ( @file_exists(get_stylesheet_directory() . '/wordpress-popular-posts/themes/' . $this->public_options['theme']['name'] . '/style.css') ) {
+                    $theme_stylesheet = get_stylesheet_directory() . '/wordpress-popular-posts/themes/' . $this->public_options['theme']['name'] . '/style.css';
                 } else {
                     $theme_stylesheet = $this->themer->get_theme($this->public_options['theme']['name'])['path'] . '/style.css';
                 }
@@ -268,7 +268,7 @@ class Output {
      * @param   integer  $position
      * @return  string
      */
-    private function render_post(\stdClass $post_object, $position = 1)
+    private function render_post(\stdClass $post_object, int $position = 1)
     {
         $is_single = $this->is_single();
         $post = '';
@@ -441,7 +441,7 @@ class Output {
      * @param   integer  $post_id
      * @return  string
      */
-    private function get_title(\stdClass $post_object, $post_id)
+    private function get_title(\stdClass $post_object, int $post_id)
     {
         if ( $post_object->id != $post_id ) {
             $title = get_the_title($post_id);
@@ -465,7 +465,7 @@ class Output {
      * @param   integer  $post_id
      * @return  string
      */
-    private function get_permalink(\stdClass $post_object, $post_id) {
+    private function get_permalink(\stdClass $post_object, int $post_id) {
         if ( $post_object->id != $post_id ) {
             return get_permalink($post_id);
         }
@@ -481,7 +481,7 @@ class Output {
      * @param   int     $post_id
      * @return  string
      */
-    private function get_thumbnail($post_id)
+    private function get_thumbnail(int $post_id)
     {
         $thumbnail = '';
 
@@ -510,7 +510,7 @@ class Output {
      * @param   integer $post_id
      * @return  string
      */
-    private function get_excerpt(\stdClass $post_object, $post_id)
+    private function get_excerpt(\stdClass $post_object, int $post_id)
     {
         $excerpt = '';
 
@@ -631,7 +631,7 @@ class Output {
      * @param   integer $post_id
      * @return  string
      */
-    private function get_taxonomies($post_id)
+    private function get_taxonomies(int $post_id)
     {
         $post_tax = '';
 
@@ -695,7 +695,7 @@ class Output {
      * @param   integer $post_id
      * @return  string
      */
-    private function get_author(\stdClass $post_object, $post_id)
+    private function get_author(\stdClass $post_object, int $post_id)
     {
         $author = ( $this->public_options['stats_tag']['author'] )
           ? get_the_author_meta('display_name', $post_object->uid != $post_id ? get_post_field('post_author', $post_id) : $post_object->uid)
@@ -759,7 +759,7 @@ class Output {
      * @return  array
      */
     //private function get_metadata(\stdClass $post_object, $post_id)
-    private function get_metadata(\stdClass $post_object, $post_id, $date, $post_tax, $author, $pageviews, $comments)
+    private function get_metadata(\stdClass $post_object, int $post_id, string $date, string $post_tax, string $author, $pageviews, int $comments) /** @TODO: starting PHP 8.0 $pageviews can be declared as mixed $pageviews */
     {
         $stats = [];
 
@@ -823,7 +823,7 @@ class Output {
      * @param   bool    Used to display post rating (if functionality is available)
      * @return  string
      */
-    private function format_content($string, $data, $rating) {
+    private function format_content(string $string, array $data, bool $rating) {
 
         if ( empty($string) || ( empty($data) || ! is_array($data) ) )
             return false;

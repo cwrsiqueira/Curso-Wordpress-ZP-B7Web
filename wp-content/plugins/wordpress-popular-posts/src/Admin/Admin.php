@@ -12,9 +12,7 @@
 
 namespace WordPressPopularPosts\Admin;
 
-use WordPressPopularPosts\Helper;
-use WordPressPopularPosts\Output;
-use WordPressPopularPosts\Query;
+use WordPressPopularPosts\{Helper, Image, Output, Query};
 
 class Admin {
 
@@ -49,7 +47,7 @@ class Admin {
      * @param   array                               $config     Admin settings.
      * @param   \WordPressPopularPosts\Image        $thumbnail  Image class.
      */
-    public function __construct(array $config, \WordPressPopularPosts\Image $thumbnail)
+    public function __construct(array $config, Image $thumbnail)
     {
         $this->config = $config;
         $this->thumbnail = $thumbnail;
@@ -307,7 +305,7 @@ class Admin {
      * @since    3.0.0
      * @param    int      $blog_id    New blog ID
      */
-    public function activate_new_site($blog_id)
+    public function activate_new_site(int $blog_id)
     {
         if ( 1 !== did_action('wpmu_new_blog') )
             return;
@@ -327,7 +325,7 @@ class Admin {
      * @param    int       $blog_id
      * @return   array
      */
-    public function delete_site_data($tables, $blog_id)
+    public function delete_site_data(array $tables, int $blog_id)
     {
         global $wpdb;
 
@@ -488,8 +486,8 @@ class Admin {
         if ( is_array($options) && ! empty($options) )
             $args = Helper::merge_array_r($args, $options);
 
-        $trending = new Query($args);
-        $posts = $trending->get_posts();
+        $query = new Query($args);
+        $posts = $query->get_posts();
 
         $this->render_list($posts, 'trending');
         echo '<p id="wpp_read_more"><a href="' . admin_url('options-general.php?page=wordpress-popular-posts') . '">' . __('View more', 'wordpress-popular-posts') . '</a><p>';
@@ -654,7 +652,7 @@ class Admin {
      * @param   string  $file
      * @return  array
      */
-    public function add_plugin_settings_link($links, $file)
+    public function add_plugin_settings_link(array $links, string $file)
     {
         $plugin_file = 'wordpress-popular-posts/wordpress-popular-posts.php';
 
@@ -712,7 +710,7 @@ class Admin {
      * @since   4.0.0
      * @return  string
      */
-    public function get_chart_data($range = 'last7days', $time_unit = 'HOUR', $time_quantity = 24)
+    public function get_chart_data(string $range = 'last7days', string $time_unit = 'HOUR', int $time_quantity = 24)
     {
         $dates = $this->get_dates($range, $time_unit, $time_quantity);
         $start_date = $dates[0];
@@ -783,11 +781,11 @@ class Admin {
      * @since   5.0.0
      * @return  array|bool
      */
-    private function get_dates($range = 'last7days', $time_unit = 'HOUR', $time_quantity = 24)
+    private function get_dates(string $range = 'last7days', string $time_unit = 'HOUR', int $time_quantity = 24)
     {
         $valid_ranges = ['today', 'daily', 'last24hours', 'weekly', 'last7days', 'monthly', 'last30days', 'all', 'custom'];
         $range = in_array($range, $valid_ranges) ? $range : 'last7days';
-        $now = new \DateTime(Helper::now(), new \DateTimeZone(Helper::get_timezone()));
+        $now = new \DateTime(Helper::now(), wp_timezone());
 
         // Determine time range
         switch( $range ){
@@ -882,7 +880,7 @@ class Admin {
      * @param   string  $item
      * @return  array
      */
-    public function get_range_item_count($start_date, $end_date, $item = 'views')
+    public function get_range_item_count(string $start_date, string $end_date, string $item = 'views')
     {
         global $wpdb;
 
@@ -1099,8 +1097,8 @@ class Admin {
 
             }
 
-            $popular_items = new \WordPressPopularPosts\Query($args);
-            $posts = $popular_items->get_posts();
+            $query = new Query($args);
+            $posts = $query->get_posts();
 
             if ( 'trending' != $items ) {
                 remove_all_filters('wpp_query_join', 1);
@@ -1118,12 +1116,9 @@ class Admin {
      * @since   5.0.0
      * @param   array
      */
-    public function render_list($posts, $list = 'most-viewed')
+    public function render_list(array $posts, $list = 'most-viewed')
     {
-        if (
-            is_array($posts)
-            && ! empty($posts)
-        ) {
+        if ( ! empty($posts) ) {
         ?>
         <ol class="popular-posts-list">
         <?php
@@ -1275,7 +1270,7 @@ class Admin {
      * @param string $meta_key   Meta key.
      * @param mixed  $meta_value Meta value.
      */
-    public function updated_post_meta($meta_id, $post_id, $meta_key, $meta_value)
+    public function updated_post_meta(int $meta_id, int $post_id, string $meta_key, $meta_value) /** @TODO: starting PHP 8.0 $meta_valued can be declared as mixed $meta_value, see https://www.php.net/manual/en/language.types.declarations.php */
     {
         if ( '_thumbnail_id' == $meta_key ) {
             $this->flush_post_thumbnail($post_id);
@@ -1292,7 +1287,7 @@ class Admin {
      * @param string $meta_key   Meta key.
      * @param mixed  $meta_value Meta value.
      */
-    public function deleted_post_meta($meta_ids, $post_id, $meta_key, $meta_value)
+    public function deleted_post_meta(array $meta_ids, int $post_id, string $meta_key, $meta_value) /** @TODO: starting PHP 8.0 $meta_valued can be declared as mixed $meta_value */
     {
         if ( '_thumbnail_id' == $meta_key ) {
             $this->flush_post_thumbnail($post_id);
@@ -1306,7 +1301,7 @@ class Admin {
      *
      * @param    integer    $post_id     Post ID
      */
-    public function flush_post_thumbnail($post_id)
+    public function flush_post_thumbnail(int $post_id)
     {
         $wpp_uploads_dir = $this->thumbnail->get_plugin_uploads_dir();
 
@@ -1348,9 +1343,10 @@ class Admin {
      * Purges post from data/summary tables.
      *
      * @since    3.3.0
+     * @param    int      $post_ID
      * @global   object   $wpdb
      */
-    public function purge_post($post_ID)
+    public function purge_post(int $post_ID)
     {
         global $wpdb;
 
@@ -1407,11 +1403,11 @@ class Admin {
             ?>
             <div class="notice notice-warning">
                 <p><?php printf(
-                    __("<strong>WordPress Popular Posts:</strong> It seems your site is popular (great!) You may want to check <a href=\"%s\">these suggestions</a> to make sure your website's performance stays up to par.", 'wordpress-popular-posts'),
+                    __("<strong>WordPress Popular Posts:</strong> It seems your site is popular (great!) You may want to check <a href=\"%s\">these recommendations</a> to make sure your website's performance stays up to par.", 'wordpress-popular-posts'),
                     'https://github.com/cabrerahector/wordpress-popular-posts/wiki/7.-Performance'
                 ) ?></p>
                 <?php if ( current_user_can('manage_options') ) : ?>
-                <p><a class="button button-primary wpp-dismiss-performance-notice" href="<?php echo add_query_arg('wpp_dismiss_performance_notice', '1'); ?>"><?php _e("Dismiss", "wordpress-popular-posts"); ?></a> <a class="button wpp-remind-performance-notice" href="<?php echo add_query_arg('wpp_remind_performance_notice', '1'); ?>"><?php _e("Remind me later", "wordpress-popular-posts"); ?></a> <span class="spinner" style="float: none;"></span></p>
+                <p><a class="button button-primary wpp-dismiss-performance-notice" href="<?php echo esc_url(add_query_arg('wpp_dismiss_performance_notice', '1')); ?>"><?php _e("Dismiss", "wordpress-popular-posts"); ?></a> <a class="button wpp-remind-performance-notice" href="<?php echo esc_url(add_query_arg('wpp_remind_performance_notice', '1')); ?>"><?php _e("Remind me later", "wordpress-popular-posts"); ?></a> <span class="spinner" style="float: none;"></span></p>
                 <?php endif; ?>
             </div>
             <?php

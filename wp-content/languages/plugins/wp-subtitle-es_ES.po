@@ -1,0 +1,70 @@
+# Translation of Plugins - WP Subtitle - Stable (latest release) in Spanish (Spain)
+# This file is distributed under the same license as the Plugins - WP Subtitle - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2019-09-28 12:06:51+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/3.0.0-alpha.2\n"
+"Language: es\n"
+"Project-Id-Version: Plugins - WP Subtitle - Stable (latest release)\n"
+
+#: plugin/includes/compat/woocommerce.php:110
+msgid "Add subtitle field to product edit screen"
+msgstr "Añadir un campo de subtítulos a la pantalla de edición del producto"
+
+#: plugin/includes/compat/woocommerce.php:109
+msgid "Enable Product Subtitles"
+msgstr "Activar subtítulos en productos"
+
+#: plugin/includes/compat/woocommerce.php:126
+msgid "Show on product archives"
+msgstr "Mostrar en archivos de productos"
+
+#: plugin/includes/compat/woocommerce.php:118
+msgid "Show on single product pages"
+msgstr "Mostrar en páginas individuales de productos"
+
+#: plugin/includes/compat/woocommerce.php:117
+msgid "Subtitle Display"
+msgstr "Mostrar subtítulos"
+
+#: plugin/admin/admin.php:109 plugin/admin/admin.php:203
+#: plugin/admin/admin.php:274
+msgid "Subtitle"
+msgstr "Subtítulo"
+
+#. Plugin Name of the plugin
+#: plugin/includes/compat/woocommerce.php:102
+msgid "WP Subtitle"
+msgstr "WP Subtitle"
+
+#: plugin/admin/admin.php:317 plugin/admin/admin.php:344
+msgid "Enter subtitle here"
+msgstr "Introduce el subtítulo aquí"
+
+#. Author URI of the plugin
+msgid "https://github.com/benhuson/wp-subtitle"
+msgstr "https://github.com/benhuson/wp-subtitle"
+
+#: plugin/admin/pointers.php:150
+msgid "This field has moved from a meta box to below the post title."
+msgstr "Este campo se ha movido de una caja meta a debajo del título de la publicación."
+
+#: plugin/admin/pointers.php:149
+msgid "%s Field"
+msgstr "Campo %s"
+
+#. Author of the plugin
+msgid "Ben Huson, Husani Oakley"
+msgstr "Ben Huson, Husani Oakley"
+
+#. Plugin URI of the plugin
+msgid "http://wordpress.org/plugins/wp-subtitle/"
+msgstr "http://es.wordpress.org/plugins/wp-subtitle/"
+
+#. Description of the plugin
+msgid "Adds a subtitle field to pages and posts. Possible to add support for custom post types."
+msgstr "Añadir un campo de subtítulos a las páginas y entradas. Es posible añadir compatibilidad para tipos de contenido personalizados."
